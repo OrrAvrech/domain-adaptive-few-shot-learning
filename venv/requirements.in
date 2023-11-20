@@ -1,0 +1,12 @@
+yt-dlp
+numpy
+opencv-python
+torch
+torchvision
+torchaudio
+transformers
+pyrallis
+PyYAML
+black
+matplotlib
+Google-Images-Search

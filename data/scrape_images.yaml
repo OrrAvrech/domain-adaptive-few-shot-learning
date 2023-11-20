@@ -1,0 +1,17 @@
+classes:
+  - elephant
+  - piano
+  - fire truck
+  - zebra
+  - coffee mug
+  - ice cream
+  - mushroom
+  - volcano
+  - gorilla
+  - tractor
+
+prefix:
+  - "an abstract painting of a"
+
+limit_per_class: 10
+output_dir: "/Users/orrav/Documents/Data/domain-adaptive-few-shot-learning"
