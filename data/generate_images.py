@@ -1,4 +1,5 @@
 import torch
+import random
 import pyrallis
 from pathlib import Path
 from diffusers import DiffusionPipeline
@@ -13,9 +14,10 @@ class ImageGeneratorConfig:
     output_dir: Path
 
     def __post_init__(self):
-        class_prompts = []
+        class_prompts = dict()
         for cls in self.classes:
-            class_prompts += [p.replace("_", cls) for p in self.prompts]
+            cls_pair = random.choice([c for c in self.classes if c != cls])
+            class_prompts[cls] = [p.replace("_", cls).replace("+", cls_pair) for p in self.prompts]
         self.class_prompts = class_prompts
 
         self.output_dir.mkdir(exist_ok=True, parents=True)
@@ -27,11 +29,14 @@ def main(cfg: ImageGeneratorConfig):
                                              use_safetensors=True, variant="fp16")
     pipe.to("cuda")
 
-    for prompt in cfg.class_prompts:
-        print(prompt)
-        images = pipe(prompt=prompt).images[:cfg.images_per_prompt]
-        filename = str(prompt).replace(" ", "_")
-        [im.save(cfg.output_dir / f"{filename}_{i}.png") for i, im in enumerate(images)]
+    for cls, prompts in cfg.class_prompts.items():
+        for prompt in prompts:
+            print(prompt)
+            images = pipe(prompt=prompt).images[:cfg.images_per_prompt]
+            filename = str(prompt).replace(" ", "_")
+            cls_dir = cfg.output_dir / cls
+            cls_dir.mkdir(exist_ok=True, parents=True)
+            [im.save(cls_dir / f"{filename}_{i}.png") for i, im in enumerate(images)]
 
 
 if __name__ == '__main__':

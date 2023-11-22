@@ -1,0 +1,43 @@
+classes:
+  - elephant
+  - piano
+  - fire truck
+  - zebra
+  - coffee mug
+  - ice cream
+  - mushroom
+  - volcano
+  - gorilla
+  - tractor
+
+prompts:
+  - "an abstract painting of a _"
+  - "an abstract geometric _ mosaic"
+  - "a silhouette in circles of a _"
+  - "an abstract minimalist _ outlines in squares"
+  - "an image of a _ in Dotted Patterns"
+  - "an image of a _ Composed of Tiny Squares"
+  - "an image of a _ in Spiraling Lines"
+  - "an image of a _ with Abstract Waves"
+  - "an image of a _ in Pixel Art"
+  - "an image of a _ in Abstract Calligraphy"
+  - "an abstract image of a _ in the Style of Vincent van Gogh"
+  - "an abstract image of a _ in the Style of Pablo Picasso"
+  - "an abstract image of a _ in the Style of Claude Monet"
+  - "an abstract image of a _ in the Style of Georgia O'Keeffe"
+  - "an abstract image of a _ in the Style of Frida Kahlo"
+  - "an abstract image of a _ in the Style of Paul Cézanne"
+  - "an abstract image of a _ in the Style of J.M.W. Turner"
+  - "an abstract image of a _ in the Style of Edward Hopper"
+  - "an abstract image of a _ in the Style of Salvador Dalí"
+  - "an abstract image of a _ in the Style of Wassily Kandinsky"
+  - "an abstract image of a _ in the Style of Leonardo da Vinci"
+  - "an abstract image of a _ in the Style of Rembrandt"
+  - "an abstract image of a _ in the Style of Andy Warhol"
+  - "an abstract image of a _ in the Style of Joan Miró"
+  - "an abstract image of a _ in the Style of Gustav Klimt"
+  - "a _ texture in the form of a +"
+  - "a shape of a _ in the color of a +"
+
+images_per_prompt: 1
+output_dir: "./saved_images"
