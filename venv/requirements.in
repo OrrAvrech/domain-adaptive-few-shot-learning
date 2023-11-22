@@ -10,3 +10,7 @@ PyYAML
 black
 matplotlib
 Google-Images-Search
+invisible_watermark
+accelerate
+safetensors
+diffusers

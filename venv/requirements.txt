@@ -4,6 +4,8 @@
 #
 #    pip-compile requirements.in
 #
+accelerate==0.24.1
+    # via -r requirements.in
 black==23.11.0
     # via -r requirements.in
 brotli==1.1.0
@@ -26,8 +28,11 @@ contourpy==1.2.0
     # via matplotlib
 cycler==0.12.1
     # via matplotlib
+diffusers==0.23.1
+    # via -r requirements.in
 filelock==3.13.1
     # via
+    #   diffusers
     #   huggingface-hub
     #   torch
     #   transformers
@@ -58,10 +63,16 @@ httplib2==0.22.0
     #   google-auth-httplib2
 huggingface-hub==0.19.4
     # via
+    #   accelerate
+    #   diffusers
     #   tokenizers
     #   transformers
 idna==3.4
     # via requests
+importlib-metadata==6.8.0
+    # via diffusers
+invisible-watermark==0.2.0
+    # via -r requirements.in
 jinja2==3.1.2
     # via torch
 kiwisolver==1.4.5
@@ -83,15 +94,22 @@ networkx==3.2.1
 numpy==1.26.2
     # via
     #   -r requirements.in
+    #   accelerate
     #   contourpy
+    #   diffusers
+    #   invisible-watermark
     #   matplotlib
     #   opencv-python
+    #   pywavelets
     #   torchvision
     #   transformers
 opencv-python==4.8.1.78
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   invisible-watermark
 packaging==23.2
     # via
+    #   accelerate
     #   black
     #   huggingface-hub
     #   matplotlib
@@ -100,7 +118,9 @@ pathspec==0.11.2
     # via black
 pillow==10.1.0
     # via
+    #   diffusers
     #   google-images-search
+    #   invisible-watermark
     #   matplotlib
     #   python-resize-image
     #   torchvision
@@ -110,6 +130,8 @@ protobuf==4.25.1
     # via
     #   google-api-core
     #   googleapis-common-protos
+psutil==5.9.6
+    # via accelerate
 pyasn1==0.5.0
     # via
     #   pyasn1-modules
@@ -130,16 +152,22 @@ python-dateutil==2.8.2
     # via matplotlib
 python-resize-image==1.1.20
     # via google-images-search
+pywavelets==1.5.0
+    # via invisible-watermark
 pyyaml==6.0.1
     # via
     #   -r requirements.in
+    #   accelerate
     #   huggingface-hub
     #   pyrallis
     #   transformers
 regex==2023.10.3
-    # via transformers
+    # via
+    #   diffusers
+    #   transformers
 requests==2.31.0
     # via
+    #   diffusers
     #   google-api-core
     #   google-images-search
     #   huggingface-hub
@@ -150,7 +178,10 @@ requests==2.31.0
 rsa==4.9
     # via google-auth
 safetensors==0.4.0
-    # via transformers
+    # via
+    #   -r requirements.in
+    #   diffusers
+    #   transformers
 six==1.16.0
     # via
     #   google-images-search
@@ -166,6 +197,8 @@ tomli==2.0.1
 torch==2.1.1
     # via
     #   -r requirements.in
+    #   accelerate
+    #   invisible-watermark
     #   torchaudio
     #   torchvision
 torchaudio==2.1.1
@@ -196,3 +229,5 @@ websockets==12.0
     # via yt-dlp
 yt-dlp==2023.11.16
     # via -r requirements.in
+zipp==3.17.0
+    # via importlib-metadata

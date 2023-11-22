@@ -12,6 +12,11 @@ classes:
 
 prefix:
   - "an abstract painting of a"
+#  - "a symbolic artwork depicting a"
+#  - "a surrealistic artwork featuring a"
+#  - "a nontraditional depiction of a"
+#  - "an interpretative illustration of a"
+#  - "a symbolic rendition of"
 
-limit_per_class: 10
+limit_per_class: 70
 output_dir: "/Users/orrav/Documents/Data/domain-adaptive-few-shot-learning"
