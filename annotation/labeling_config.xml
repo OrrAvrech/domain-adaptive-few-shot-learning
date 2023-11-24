@@ -1,27 +1,27 @@
 <View>
   <Image name="image" value="$image"/>
-  <Header value="Please enter the name of the object which is the most dominant in the image:"/>
+  <Header value="Please enter the name of the object which is the most dominant in the image: (skip annotation if no clear object)"/>
   <TextArea name="caption" toName="image" placeholder="Enter object here..."
             rows="1" maxSubmissions="1"/>
 
   <Header value="Please rate the level of clarity of the object in the image (1-5):"/>
   <Header value="Rating 1 - Not Clear at All:
 An object is entirely or almost entirely unclear. It appears extremely blurry, distorted, or obscured to the point where its features or identity cannot be determined." size="12" />
-        <Header value="Rating 5 - Extremely Clear:
+  <Header value="Rating 5 - Extremely Clear:
 An object exhibits exceptional clarity. It appears extremely sharp, well-defined, and easily identifiable with no visible blurriness or distortion, providing an exceptionally clear representation." size="12" />
 
-  <View style="margin-left: auto; margin-right: auto; width: 16em">
-  	<Rating name="clarity" toName="image"/>
+  <View style="margin-left: auto; margin-right: auto; width: 20em">
+  	<Rating name="clarity" toName="image" size="large"/>
   </View>
 
   <Header value="Please rate the level of abstraction of the image (1-5):"/>
-    <Header value="Rating 1 - Not Abstract:
+  <Header value="Rating 1 - Not Abstract:
 The image is not abstract at all. It depicts objects, scenes, or subjects in a highly realistic, concrete, and straightforward manner. There's a complete absence of abstract elements or interpretations." size="12" />
-        <Header value="Rating 5 - Extremely Abstract:
+  <Header value="Rating 5 - Extremely Abstract:
 The image is highly abstract. It may consist of non-representational shapes, colors, patterns, or compositions that are entirely divorced from concrete subjects, aiming for pure abstraction or conceptual representation." size="12" />
 
-  <View style="margin-left: auto; margin-right: auto; width: 16em">
-  	<Rating name="abstraction" toName="image"/>
+  <View style="margin-left: auto; margin-right: auto; width: 20em">
+  	<Rating name="abstraction" toName="image" size="large"/>
   </View>
 
 
