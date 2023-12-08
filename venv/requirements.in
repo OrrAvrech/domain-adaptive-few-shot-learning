@@ -14,3 +14,6 @@ invisible_watermark
 accelerate
 safetensors
 diffusers
+spacy
+pandas
+editdistance

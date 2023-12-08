@@ -1,5 +1,6 @@
 import json
 import spacy
+import editdistance
 from pathlib import Path
 import pandas as pd
 
@@ -10,37 +11,54 @@ def read_file(filepath: Path) -> dict:
     return data
 
 
-def similar_words(word1: str, word2: str, model: spacy.Language, thresh: float) -> bool:
-    # add edit distance to capture non-words with typos or missing spaces
+def similar_words(
+    word1: str,
+    word2: str,
+    model: spacy.Language,
+    wv_thresh: float,
+    editdist_thresh: float,
+) -> bool:
+    # word2vec and editdistance to capture typos and missing spaces
+    retval = False
     score = 0.0
-    word1 = model(word1)
-    word2 = model(word2)
+    word1_nlp = model(word1)
+    word2_nlp = model(word2)
     try:
-        score = word1.similarity(word2)
+        score = word1_nlp.similarity(word2_nlp)
     except KeyError:
         pass
 
-    if score >= thresh:
-        return True
+    if score >= wv_thresh:
+        retval = True
     else:
-        return False
+        edit_dist = editdistance.eval(word1, word2)
+        if edit_dist <= editdist_thresh:
+            retval = True
+    return retval
 
 
-def process_annotations(df: pd.DataFrame, sim_thresh: float):
-    df = df[df["skip"] == False]
+def process_annotations(df: pd.DataFrame, wv_thresh: float, editdist_thresh: float):
+    df = df[~df["skip"]]
     nlp = spacy.load("en_core_web_sm")
-    df["new_class"] = df.apply(
-        lambda x: x["folder"] if similar_words(x["folder"], x["class"], nlp, sim_thresh) else None,
-        axis=1)
+    df["final_class"] = df.apply(
+        lambda x: x["folder"]
+        if similar_words(x["folder"], x["class"], nlp, wv_thresh, editdist_thresh)
+        else None,
+        axis=1,
+    )
     df = df.dropna()
+    df = df[~((df["clarity"] == 1) & (df["abstraction"] <= 2))]
     return df
 
 
 def main():
-    results_dir = Path("/Users/orrav/Documents/Data/domain-adaptive-few-shot-learning/results")
-    csv_path = Path("/Users/orrav/Documents/Data/domain-adaptive-few-shot-learning/annotations.csv")
+    root_dir = Path("/Users/orrav/Documents/Data/domain-adaptive-few-shot-learning")
+    results_dir = root_dir / "results"
+    annotations_path = root_dir / "annotations.csv"
+    filtered_path = root_dir / "filtered_annotations.csv"
     result_files = [p for p in results_dir.rglob("*") if not p.is_dir()]
-    sim_thresh = 0.5
+    wv_thresh = 0.5
+    editdist_thresh = 2
 
     data = []
     for res_path in result_files:
@@ -64,15 +82,22 @@ def main():
             except (IndexError, KeyError):
                 print(f"skip results file {res_path.name}")
 
-        row = {"img_name": img_name, "folder": img_folder, "class": cls,
-               "clarity": clarity, "abstraction": abstraction,
-               "annotator": annotator_id, "skip": skip}
+        row = {
+            "img_name": img_name,
+            "folder": img_folder,
+            "class": cls,
+            "clarity": clarity,
+            "abstraction": abstraction,
+            "annotator": annotator_id,
+            "skip": skip,
+        }
         data.append(row)
 
     df = pd.DataFrame(data)
-    # df.to_csv(csv_path)
-    filtered_df = process_annotations(df, sim_thresh)
+    df.to_csv(annotations_path)
+    filtered_df = process_annotations(df, wv_thresh, editdist_thresh)
+    filtered_df.to_csv(filtered_path)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

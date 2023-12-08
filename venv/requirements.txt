@@ -6,12 +6,21 @@
 #
 accelerate==0.24.1
     # via -r requirements.in
+annotated-types==0.6.0
+    # via pydantic
 black==23.11.0
     # via -r requirements.in
+blis==0.7.11
+    # via thinc
 brotli==1.1.0
     # via yt-dlp
 cachetools==5.3.2
     # via google-auth
+catalogue==2.0.10
+    # via
+    #   spacy
+    #   srsly
+    #   thinc
 certifi==2023.11.17
     # via
     #   requests
@@ -22,13 +31,27 @@ click==8.1.7
     # via
     #   black
     #   google-images-search
+    #   typer
+cloudpathlib==0.16.0
+    # via weasel
 colorama==0.4.6
     # via google-images-search
+confection==0.1.4
+    # via
+    #   thinc
+    #   weasel
 contourpy==1.2.0
     # via matplotlib
 cycler==0.12.1
     # via matplotlib
+cymem==2.0.8
+    # via
+    #   preshed
+    #   spacy
+    #   thinc
 diffusers==0.23.1
+    # via -r requirements.in
+editdistance==0.6.2
     # via -r requirements.in
 filelock==3.13.1
     # via
@@ -74,15 +97,24 @@ importlib-metadata==6.8.0
 invisible-watermark==0.2.0
     # via -r requirements.in
 jinja2==3.1.2
-    # via torch
+    # via
+    #   spacy
+    #   torch
 kiwisolver==1.4.5
     # via matplotlib
+langcodes==3.3.0
+    # via spacy
 markupsafe==2.1.3
     # via jinja2
 matplotlib==3.8.2
     # via -r requirements.in
 mpmath==1.3.0
     # via sympy
+murmurhash==1.0.10
+    # via
+    #   preshed
+    #   spacy
+    #   thinc
 mutagen==1.47.0
     # via yt-dlp
 mypy-extensions==1.0.0
@@ -95,12 +127,16 @@ numpy==1.26.2
     # via
     #   -r requirements.in
     #   accelerate
+    #   blis
     #   contourpy
     #   diffusers
     #   invisible-watermark
     #   matplotlib
     #   opencv-python
+    #   pandas
     #   pywavelets
+    #   spacy
+    #   thinc
     #   torchvision
     #   transformers
 opencv-python==4.8.1.78
@@ -113,7 +149,12 @@ packaging==23.2
     #   black
     #   huggingface-hub
     #   matplotlib
+    #   spacy
+    #   thinc
     #   transformers
+    #   weasel
+pandas==2.1.3
+    # via -r requirements.in
 pathspec==0.11.2
     # via black
 pillow==10.1.0
@@ -126,6 +167,10 @@ pillow==10.1.0
     #   torchvision
 platformdirs==4.0.0
     # via black
+preshed==3.0.9
+    # via
+    #   spacy
+    #   thinc
 protobuf==4.25.1
     # via
     #   google-api-core
@@ -140,6 +185,14 @@ pyasn1-modules==0.3.0
     # via google-auth
 pycryptodomex==3.19.0
     # via yt-dlp
+pydantic==2.5.2
+    # via
+    #   confection
+    #   spacy
+    #   thinc
+    #   weasel
+pydantic-core==2.14.5
+    # via pydantic
 pyfiglet==0.8.post1
     # via google-images-search
 pyparsing==3.1.1
@@ -149,9 +202,13 @@ pyparsing==3.1.1
 pyrallis==0.3.1
     # via -r requirements.in
 python-dateutil==2.8.2
-    # via matplotlib
+    # via
+    #   matplotlib
+    #   pandas
 python-resize-image==1.1.20
     # via google-images-search
+pytz==2023.3.post1
+    # via pandas
 pywavelets==1.5.0
     # via invisible-watermark
 pyyaml==6.0.1
@@ -172,8 +229,10 @@ requests==2.31.0
     #   google-images-search
     #   huggingface-hub
     #   python-resize-image
+    #   spacy
     #   torchvision
     #   transformers
+    #   weasel
     #   yt-dlp
 rsa==4.9
     # via google-auth
@@ -186,10 +245,28 @@ six==1.16.0
     # via
     #   google-images-search
     #   python-dateutil
+smart-open==6.4.0
+    # via
+    #   spacy
+    #   weasel
+spacy==3.7.2
+    # via -r requirements.in
+spacy-legacy==3.0.12
+    # via spacy
+spacy-loggers==1.0.5
+    # via spacy
+srsly==2.4.8
+    # via
+    #   confection
+    #   spacy
+    #   thinc
+    #   weasel
 sympy==1.12
     # via torch
 termcolor==1.1.0
     # via google-images-search
+thinc==8.2.1
+    # via spacy
 tokenizers==0.15.0
     # via transformers
 tomli==2.0.1
@@ -208,26 +285,47 @@ torchvision==0.16.1
 tqdm==4.66.1
     # via
     #   huggingface-hub
+    #   spacy
     #   transformers
 transformers==4.35.2
     # via -r requirements.in
+typer==0.9.0
+    # via
+    #   spacy
+    #   weasel
 typing-extensions==4.8.0
     # via
     #   black
+    #   cloudpathlib
     #   huggingface-hub
+    #   pydantic
+    #   pydantic-core
     #   torch
+    #   typer
     #   typing-inspect
 typing-inspect==0.9.0
     # via pyrallis
+tzdata==2023.3
+    # via pandas
 uritemplate==4.1.1
     # via google-api-python-client
 urllib3==2.1.0
     # via
     #   requests
     #   yt-dlp
+wasabi==1.1.2
+    # via
+    #   spacy
+    #   thinc
+    #   weasel
+weasel==0.3.4
+    # via spacy
 websockets==12.0
     # via yt-dlp
 yt-dlp==2023.11.16
     # via -r requirements.in
 zipp==3.17.0
     # via importlib-metadata
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools
