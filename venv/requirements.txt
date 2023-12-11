@@ -8,8 +8,32 @@ accelerate==0.24.1
     # via -r requirements.in
 annotated-types==0.6.0
     # via pydantic
+anyio==4.1.0
+    # via jupyter-server
+appnope==0.1.3
+    # via ipykernel
+argon2-cffi==23.1.0
+    # via jupyter-server
+argon2-cffi-bindings==21.2.0
+    # via argon2-cffi
+arrow==1.3.0
+    # via isoduration
+asttokens==2.4.1
+    # via stack-data
+async-lru==2.0.4
+    # via jupyterlab
+attrs==23.1.0
+    # via
+    #   jsonschema
+    #   referencing
+babel==2.13.1
+    # via jupyterlab-server
+beautifulsoup4==4.12.2
+    # via nbconvert
 black==23.11.0
     # via -r requirements.in
+bleach==6.1.0
+    # via nbconvert
 blis==0.7.11
     # via thinc
 brotli==1.1.0
@@ -25,6 +49,8 @@ certifi==2023.11.17
     # via
     #   requests
     #   yt-dlp
+cffi==1.16.0
+    # via argon2-cffi-bindings
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
@@ -36,6 +62,8 @@ cloudpathlib==0.16.0
     # via weasel
 colorama==0.4.6
     # via google-images-search
+comm==0.2.0
+    # via ipykernel
 confection==0.1.4
     # via
     #   thinc
@@ -49,10 +77,24 @@ cymem==2.0.8
     #   preshed
     #   spacy
     #   thinc
+debugpy==1.8.0
+    # via ipykernel
+decorator==5.1.1
+    # via ipython
+defusedxml==0.7.1
+    # via nbconvert
 diffusers==0.23.1
     # via -r requirements.in
 editdistance==0.6.2
     # via -r requirements.in
+exceptiongroup==1.2.0
+    # via
+    #   anyio
+    #   ipython
+executing==2.0.1
+    # via stack-data
+fastjsonschema==2.19.0
+    # via nbformat
 filelock==3.13.1
     # via
     #   diffusers
@@ -61,6 +103,8 @@ filelock==3.13.1
     #   transformers
 fonttools==4.45.0
     # via matplotlib
+fqdn==1.5.1
+    # via jsonschema
 fsspec==2023.10.0
     # via
     #   huggingface-hub
@@ -91,23 +135,92 @@ huggingface-hub==0.19.4
     #   tokenizers
     #   transformers
 idna==3.4
-    # via requests
+    # via
+    #   anyio
+    #   jsonschema
+    #   requests
 importlib-metadata==6.8.0
     # via diffusers
 invisible-watermark==0.2.0
     # via -r requirements.in
+ipykernel==6.27.1
+    # via jupyterlab
+ipython==8.18.1
+    # via ipykernel
+isoduration==20.11.0
+    # via jsonschema
+jedi==0.19.1
+    # via ipython
 jinja2==3.1.2
     # via
+    #   jupyter-server
+    #   jupyterlab
+    #   jupyterlab-server
+    #   nbconvert
     #   spacy
     #   torch
+json5==0.9.14
+    # via jupyterlab-server
+jsonpointer==2.4
+    # via jsonschema
+jsonschema[format-nongpl]==4.20.0
+    # via
+    #   jupyter-events
+    #   jupyterlab-server
+    #   nbformat
+jsonschema-specifications==2023.11.2
+    # via jsonschema
+jupyter-client==8.6.0
+    # via
+    #   ipykernel
+    #   jupyter-server
+    #   nbclient
+jupyter-core==5.5.0
+    # via
+    #   ipykernel
+    #   jupyter-client
+    #   jupyter-server
+    #   jupyterlab
+    #   nbclient
+    #   nbconvert
+    #   nbformat
+jupyter-events==0.9.0
+    # via jupyter-server
+jupyter-lsp==2.2.1
+    # via jupyterlab
+jupyter-server==2.12.1
+    # via
+    #   jupyter-lsp
+    #   jupyterlab
+    #   jupyterlab-server
+    #   notebook
+    #   notebook-shim
+jupyter-server-terminals==0.4.4
+    # via jupyter-server
+jupyterlab==4.0.9
+    # via notebook
+jupyterlab-pygments==0.3.0
+    # via nbconvert
+jupyterlab-server==2.25.2
+    # via
+    #   jupyterlab
+    #   notebook
 kiwisolver==1.4.5
     # via matplotlib
 langcodes==3.3.0
     # via spacy
 markupsafe==2.1.3
-    # via jinja2
+    # via
+    #   jinja2
+    #   nbconvert
 matplotlib==3.8.2
     # via -r requirements.in
+matplotlib-inline==0.1.6
+    # via
+    #   ipykernel
+    #   ipython
+mistune==3.0.2
+    # via nbconvert
 mpmath==1.3.0
     # via sympy
 murmurhash==1.0.10
@@ -121,8 +234,25 @@ mypy-extensions==1.0.0
     # via
     #   black
     #   typing-inspect
+nbclient==0.9.0
+    # via nbconvert
+nbconvert==7.12.0
+    # via jupyter-server
+nbformat==5.9.2
+    # via
+    #   jupyter-server
+    #   nbclient
+    #   nbconvert
+nest-asyncio==1.5.8
+    # via ipykernel
 networkx==3.2.1
     # via torch
+notebook==7.0.6
+    # via -r requirements.in
+notebook-shim==0.2.3
+    # via
+    #   jupyterlab
+    #   notebook
 numpy==1.26.2
     # via
     #   -r requirements.in
@@ -143,20 +273,33 @@ opencv-python==4.8.1.78
     # via
     #   -r requirements.in
     #   invisible-watermark
+overrides==7.4.0
+    # via jupyter-server
 packaging==23.2
     # via
     #   accelerate
     #   black
     #   huggingface-hub
+    #   ipykernel
+    #   jupyter-server
+    #   jupyterlab
+    #   jupyterlab-server
     #   matplotlib
+    #   nbconvert
     #   spacy
     #   thinc
     #   transformers
     #   weasel
 pandas==2.1.3
     # via -r requirements.in
+pandocfilters==1.5.0
+    # via nbconvert
+parso==0.8.3
+    # via jedi
 pathspec==0.11.2
     # via black
+pexpect==4.9.0
+    # via ipython
 pillow==10.1.0
     # via
     #   diffusers
@@ -166,23 +309,39 @@ pillow==10.1.0
     #   python-resize-image
     #   torchvision
 platformdirs==4.0.0
-    # via black
+    # via
+    #   black
+    #   jupyter-core
 preshed==3.0.9
     # via
     #   spacy
     #   thinc
+prometheus-client==0.19.0
+    # via jupyter-server
+prompt-toolkit==3.0.41
+    # via ipython
 protobuf==4.25.1
     # via
     #   google-api-core
     #   googleapis-common-protos
 psutil==5.9.6
-    # via accelerate
+    # via
+    #   accelerate
+    #   ipykernel
+ptyprocess==0.7.0
+    # via
+    #   pexpect
+    #   terminado
+pure-eval==0.2.2
+    # via stack-data
 pyasn1==0.5.0
     # via
     #   pyasn1-modules
     #   rsa
 pyasn1-modules==0.3.0
     # via google-auth
+pycparser==2.21
+    # via cffi
 pycryptodomex==3.19.0
     # via yt-dlp
 pydantic==2.5.2
@@ -195,6 +354,10 @@ pydantic-core==2.14.5
     # via pydantic
 pyfiglet==0.8.post1
     # via google-images-search
+pygments==2.17.2
+    # via
+    #   ipython
+    #   nbconvert
 pyparsing==3.1.1
     # via
     #   httplib2
@@ -203,8 +366,12 @@ pyrallis==0.3.1
     # via -r requirements.in
 python-dateutil==2.8.2
     # via
+    #   arrow
+    #   jupyter-client
     #   matplotlib
     #   pandas
+python-json-logger==2.0.7
+    # via jupyter-events
 python-resize-image==1.1.20
     # via google-images-search
 pytz==2023.3.post1
@@ -216,8 +383,19 @@ pyyaml==6.0.1
     #   -r requirements.in
     #   accelerate
     #   huggingface-hub
+    #   jupyter-events
     #   pyrallis
     #   transformers
+pyzmq==25.1.2
+    # via
+    #   ipykernel
+    #   jupyter-client
+    #   jupyter-server
+referencing==0.32.0
+    # via
+    #   jsonschema
+    #   jsonschema-specifications
+    #   jupyter-events
 regex==2023.10.3
     # via
     #   diffusers
@@ -228,12 +406,25 @@ requests==2.31.0
     #   google-api-core
     #   google-images-search
     #   huggingface-hub
+    #   jupyterlab-server
     #   python-resize-image
     #   spacy
     #   torchvision
     #   transformers
     #   weasel
     #   yt-dlp
+rfc3339-validator==0.1.4
+    # via
+    #   jsonschema
+    #   jupyter-events
+rfc3986-validator==0.1.1
+    # via
+    #   jsonschema
+    #   jupyter-events
+rpds-py==0.13.2
+    # via
+    #   jsonschema
+    #   referencing
 rsa==4.9
     # via google-auth
 safetensors==0.4.0
@@ -241,14 +432,23 @@ safetensors==0.4.0
     #   -r requirements.in
     #   diffusers
     #   transformers
+send2trash==1.8.2
+    # via jupyter-server
 six==1.16.0
     # via
+    #   asttokens
+    #   bleach
     #   google-images-search
     #   python-dateutil
+    #   rfc3339-validator
 smart-open==6.4.0
     # via
     #   spacy
     #   weasel
+sniffio==1.3.0
+    # via anyio
+soupsieve==2.5
+    # via beautifulsoup4
 spacy==3.7.2
     # via -r requirements.in
 spacy-legacy==3.0.12
@@ -261,16 +461,26 @@ srsly==2.4.8
     #   spacy
     #   thinc
     #   weasel
+stack-data==0.6.3
+    # via ipython
 sympy==1.12
     # via torch
 termcolor==1.1.0
     # via google-images-search
+terminado==0.18.0
+    # via
+    #   jupyter-server
+    #   jupyter-server-terminals
 thinc==8.2.1
     # via spacy
+tinycss2==1.2.1
+    # via nbconvert
 tokenizers==0.15.0
     # via transformers
 tomli==2.0.1
-    # via black
+    # via
+    #   black
+    #   jupyterlab
 torch==2.1.1
     # via
     #   -r requirements.in
@@ -282,19 +492,44 @@ torchaudio==2.1.1
     # via -r requirements.in
 torchvision==0.16.1
     # via -r requirements.in
+tornado==6.4
+    # via
+    #   ipykernel
+    #   jupyter-client
+    #   jupyter-server
+    #   jupyterlab
+    #   notebook
+    #   terminado
 tqdm==4.66.1
     # via
     #   huggingface-hub
     #   spacy
     #   transformers
+traitlets==5.14.0
+    # via
+    #   comm
+    #   ipykernel
+    #   ipython
+    #   jupyter-client
+    #   jupyter-core
+    #   jupyter-events
+    #   jupyter-server
+    #   jupyterlab
+    #   matplotlib-inline
+    #   nbclient
+    #   nbconvert
+    #   nbformat
 transformers==4.35.2
     # via -r requirements.in
 typer==0.9.0
     # via
     #   spacy
     #   weasel
+types-python-dateutil==2.8.19.14
+    # via arrow
 typing-extensions==4.8.0
     # via
+    #   async-lru
     #   black
     #   cloudpathlib
     #   huggingface-hub
@@ -307,6 +542,8 @@ typing-inspect==0.9.0
     # via pyrallis
 tzdata==2023.3
     # via pandas
+uri-template==1.3.0
+    # via jsonschema
 uritemplate==4.1.1
     # via google-api-python-client
 urllib3==2.1.0
@@ -318,8 +555,18 @@ wasabi==1.1.2
     #   spacy
     #   thinc
     #   weasel
+wcwidth==0.2.12
+    # via prompt-toolkit
 weasel==0.3.4
     # via spacy
+webcolors==1.13
+    # via jsonschema
+webencodings==0.5.1
+    # via
+    #   bleach
+    #   tinycss2
+websocket-client==1.7.0
+    # via jupyter-server
 websockets==12.0
     # via yt-dlp
 yt-dlp==2023.11.16
