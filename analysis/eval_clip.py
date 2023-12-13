@@ -36,8 +36,6 @@ def main(cfg: EvalConfig):
         texts = [f"a photo of a {cls}" for cls in ds.classes]
 
     for i, batch in enumerate(test_loader):
-        if i > 5:
-            break
         images, labels = batch
         inputs = processor(text=texts, images=images, return_tensors="pt", padding=True)
 
