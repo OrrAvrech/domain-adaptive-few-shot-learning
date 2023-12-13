@@ -1,10 +1,24 @@
 import yaml
 import torch
+import pyrallis
 from pathlib import Path
 from transformers import AutoImageProcessor, ResNetForImageClassification
 from torch.utils.data import DataLoader
 from torchvision.transforms import v2
+from dataclasses import dataclass
 from datasets import MapImageDataset, ExtractRGB
+import pandas as pd
+
+
+@dataclass
+class EvalConfig:
+    images_dir: Path
+    imagenet_mapping_path: Path
+    report_path: Path
+    batch_size: int
+
+    def __post_init__(self):
+        self.report_path.parent.mkdir(exist_ok=True, parents=True)
 
 
 def read_yaml(filepath: Path) -> dict:
@@ -13,11 +27,25 @@ def read_yaml(filepath: Path) -> dict:
     return data
 
 
-def main():
-    images_dir = Path(
-        "/Users/orrav/Documents/Data/domain-adaptive-few-shot-learning/images"
-    )
-    imagenet_mapping_path = Path("./imagenet_mapping.yaml")
+def per_class_acc(
+    predictions: torch.Tensor, labels: torch.Tensor, idx2class: dict
+) -> dict[str]:
+    per_class_accuracy = dict()
+    for i in range(labels.max() + 1):
+        class_predictions = predictions[labels == i]
+        class_labels = labels[labels == i]
+        class_accuracy = (
+            torch.Tensor(class_predictions == class_labels).float().mean().item()
+            * 100.0
+        )
+        per_class_accuracy[idx2class[i]] = class_accuracy
+    return per_class_accuracy
+
+
+@pyrallis.wrap()
+def main(cfg: EvalConfig):
+    images_dir = cfg.images_dir
+    imagenet_mapping_path = cfg.imagenet_mapping_path
     mapping = read_yaml(imagenet_mapping_path)
 
     processor = AutoImageProcessor.from_pretrained("microsoft/resnet-50")
@@ -31,12 +59,10 @@ def main():
     transform = v2.Compose([ExtractRGB(), v2.ToImage(), v2.Resize(size=size)])
 
     ds = MapImageDataset(images_dir, mapping=mapping, transform=transform)
-    test_loader = DataLoader(ds, batch_size=2, shuffle=False)
+    test_loader = DataLoader(ds, batch_size=cfg.batch_size, shuffle=False)
 
-    acc_sum = 0
+    tot_pred, tot_labels = None, None
     for i, batch in enumerate(test_loader):
-        if i > 3:
-            break
         images, labels = batch
         inputs = processor(images, return_tensors="pt")
 
@@ -46,14 +72,21 @@ def main():
         predicted_in_labels = logits.argmax(-1)
         predicted_labels = ds.map_predictions(predicted_in_labels)
 
-        batch_acc = torch.Tensor(predicted_labels == labels).float().sum()
-        acc_sum += batch_acc
-        for i, (pred_in, pred) in enumerate(zip(predicted_in_labels, predicted_labels)):
-            cls_pred_in = model.config.id2label[pred_in.item()]
-            cls_pred = ds.idx2class.get(pred.item(), "other")
-            print(f"ImageNet pred: {cls_pred_in}, pred: {cls_pred}, label: {labels[i]}")
-    accuracy = acc_sum / len(ds)
-    print(f"Accuracy: {accuracy*100}")
+        if tot_pred is None:
+            tot_pred = predicted_labels
+            tot_labels = labels
+        else:
+            tot_pred = torch.cat([tot_pred, predicted_labels], dim=0)
+            tot_labels = torch.cat([tot_labels, labels], dim=0)
+
+    accuracy = torch.Tensor(tot_pred == tot_labels).float().mean() * 100
+    cls_accuracy = per_class_acc(tot_pred, tot_labels, ds.idx2class)
+    print(f"Accuracy: {accuracy}")
+    print(f"Per-Class Accuracy: {cls_accuracy}")
+
+    # report
+    cls_accuracy["overall"] = accuracy
+    pd.DataFrame(cls_accuracy, index=[0]).to_csv(cfg.report_path)
 
 
 if __name__ == "__main__":

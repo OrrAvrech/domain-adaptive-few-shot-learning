@@ -1,0 +1,4 @@
+images_dir: "./Data/domain-adaptive-few-shot-learning/images"
+imagenet_mapping_path: "./imagenet_mapping.yaml"
+report_path: "./reports/resnet50.csv"
+batch_size: 64
